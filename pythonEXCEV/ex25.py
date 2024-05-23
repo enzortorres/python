@@ -1,0 +1,8 @@
+print('\033[30mTESTE')
+print('\033[31mTESTE')
+print('\033[32mTESTE')
+print('\033[33mTESTE')
+print('\033[34mTESTE')
+print('\033[35mTESTE')
+print('\033[36mTESTE')
+print('\033[mTESTE')
