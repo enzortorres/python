@@ -1,11 +1,11 @@
 print("-"*50)
 print('Planilha salário funcionários Tutti Amici')
 print("-"*50)
-adriane = 12350.00
-guilherme = 12350.00
-vitor = 1730.00
-bruno = 2134.00
-enzo = 1730.00
+adriane = 10000.00
+guilherme = 10000.00
+vitor = 1000.00
+bruno = 2000.00
+enzo = 1000.00
 funcionario = str(input('Deseja checar o salário de qual funcionário? '))
 if funcionario == 'adriane':
     print("-"*50)
