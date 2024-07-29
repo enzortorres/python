@@ -1,2 +1,2 @@
 # python
- Estudos em python
+ studying python
