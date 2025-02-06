@@ -2,7 +2,7 @@ from tkinter import *
 
 tk = Tk()
 tk.title("Button Test")
-tk.geometry("1000x500")
+tk.geometry("1920x1080")
 
 label = Label(tk, text='First button in tkinter', font=("JetBrains Mono", 14))
 label.grid(column=0, row=0)
