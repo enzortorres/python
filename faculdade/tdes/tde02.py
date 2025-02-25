@@ -83,10 +83,9 @@
 
 # def contarDigitos(number):
 #     return len(str(abs(number)))
-
 # number = int(input("Digite um número: "))
-
 # qtd_digitos = contarDigitos(number)
+
 # print(f'O número {number} possuí {qtd_digitos} digitos.')
 
 
@@ -112,14 +111,10 @@
 # def fibonacci(n):
 #     if n < 1:
 #         return 'Número inválido! Escolha um número maior ou igual a 1'
-
 #     sequencia = [0, 1]
-    
 #     for i in range(0, n - 2):
 #         sequencia.append(sequencia[i] + sequencia[i + 1])
-        
-#     return sequencia
-    
+#     return sequencia    
 # print(fibonacci(10))
 
 
@@ -128,5 +123,4 @@
 # def tabuada(base, limite):
 #     for i in range(1, limite + 1):
 #         print(f'{base} x {i} = {base * i}')
-        
 # tabuada(5, 7)
