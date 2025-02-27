@@ -6,5 +6,4 @@ while index < len(nome):
     novo_nome += '*' + nome[index] 
     index += 1
 
-
 print(nome, novo_nome)
