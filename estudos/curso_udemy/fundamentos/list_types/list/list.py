@@ -6,9 +6,10 @@
     * append - Adiciona um valor ao final da lista
     * insert - Adiciona um valor em um lugar específico da lista
     * pop    - Remove o último valor da lista
-    * del    - Apaga um valor da lista
-    * clear  - Limpa a lista por completo 
+    * del    - Apaga um valor da lista pelo índice, um fatiamento ou a lista inteira
+    * clear  - Remove todos os valores da lista
     * extend - Estende a lista
+    * reverse - reverte as posições da lista
     * Create Read Update Delete (CRUD)
 """
 
