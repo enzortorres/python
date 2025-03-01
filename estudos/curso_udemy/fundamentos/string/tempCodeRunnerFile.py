@@ -1,2 +1,0 @@
-
-    print(letra_atual)
