@@ -25,11 +25,9 @@
 """
 
 cpf = str(input('Digite seu CPF: ')).replace('.', '').replace('-','') # ! pegar como str, para caso comece com '0', se for int, vai cortar o primeiro digito
-tamanho = len(cpf)
-print(tamanho)
 
 try:
-    if tamanho == 11:
+    if len(cpf) == 11:
         soma = 0
         cpf_digitos = cpf[0:9].__iter__()
 
@@ -40,6 +38,7 @@ try:
         primeiro_digito = resultado % 11
         primeiro_digito = 0 if primeiro_digito >= 10 else primeiro_digito
 
+        print(f"Resultado do cálculo do primeiro digito: {resultado}")
         print(f"Primeiro digito calculado: {primeiro_digito}")
         print(f"Primeiro digito: {cpf[9]}")
         print('Primeiro digito válido!' if primeiro_digito == int(cpf[9]) else 'Primeiro digito inválido')
