@@ -24,26 +24,26 @@
     O primeiro dígito do CPF é 7
 """
 
-cpf = str(input('Digite seu CPF: ')) # ! pegar como str, para caso comece com '0', se for int, vai cortar o primeiro digito
+cpf = str(input('Digite seu CPF: ')).replace('.', '').replace('-','') # ! pegar como str, para caso comece com '0', se for int, vai cortar o primeiro digito
+tamanho = len(cpf)
+print(tamanho)
 
 try:
-    soma = 0
-    cpf = cpf.replace('.', '').replace('-','')
-    print(cpf)
-    cpf_digitos = cpf[0:9].__iter__()
-    
-    for i in range(10, 1, -1):
-        soma += (i * int(next(cpf_digitos)))
-        
-    print(soma)
-    resultado = soma * 10
-    primeiro_digito = resultado % 11
-    primeiro_digito = 0 if primeiro_digito >= 10 else primeiro_digito
-    
-    print(f"Primeiro digito calculado: {primeiro_digito}")
-    print(f"Primeiro digito: {cpf[9]}")
-    print('Primeiro digito válido!' if primeiro_digito == int(cpf[9]) else 'Primeiro digito inválido')
-    
-    
+    if tamanho == 11:
+        soma = 0
+        cpf_digitos = cpf[0:9].__iter__()
+
+        for i in range(10, 1, -1):
+            soma += (i * int(next(cpf_digitos)))
+
+        resultado = soma * 10
+        primeiro_digito = resultado % 11
+        primeiro_digito = 0 if primeiro_digito >= 10 else primeiro_digito
+
+        print(f"Primeiro digito calculado: {primeiro_digito}")
+        print(f"Primeiro digito: {cpf[9]}")
+        print('Primeiro digito válido!' if primeiro_digito == int(cpf[9]) else 'Primeiro digito inválido')
+    else:
+        raise ValueError("CPF inválido, o número de dígitos deve ser 11.")
 except Exception as error:
     print(f"Digite um cpf válido. ERRO: \033[31m{error}\033[m")
