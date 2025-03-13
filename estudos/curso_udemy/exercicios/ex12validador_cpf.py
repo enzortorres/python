@@ -25,7 +25,7 @@
     
     Calculo do segundo dígito do CPF
     
-    1CPF: 746.824.890-70
+    CPF: 746.824.890-70
     Colete a soma dos 9 primeiros dígitos do CPF,
     MAIS O PRIMEIRO DIGITO,
     multiplicando cada um dos valores por uma
@@ -54,10 +54,16 @@ def linha(tam = 42):
     print('\n' + "=" * tam + '\n')
 
 linha()
-cpf_format = str(input('Digite seu CPF: ')) # ! pegar como str, para caso comece com '0', se for int, vai cortar o primeiro digito
-CPF = cpf_format.replace('.', '').replace('-','')
+
+import re
+import random
+
+cpf_string = str(input('Digite seu CPF: ')) # ! pegar como str, para caso comece com '0', se for int, vai cortar o primeiro digito
+
+CPF = re.sub(r'[^0-9]', '',cpf_string)
+
 try:
-    if len(CPF) == 11:
+    if len(CPF) == 11 and CPF != CPF[0] * len(CPF):
         soma_primeiro_digito = 0
         soma_segundo_digito = 0
         cpf_digitos_primeiro_digito = CPF[0:9].__iter__()
@@ -68,7 +74,6 @@ try:
             
         for i in range(11, 1, -1):
             soma_segundo_digito += (i * int(next(cpf_digitos_segundo_digito)))
-        print(soma_segundo_digito)
 
         # ? Cálculo para descobrir o primeiro dígito
         resultado_primeiro_digito = (soma_primeiro_digito * 10) % 11
@@ -92,8 +97,10 @@ try:
         if primeiro_digito == int(CPF[9]) and segundo_digito == int(CPF[10]):
             ambos_validos = True
         
-        print(f'\033[32mCPF {cpf_format} é válido!\033[m' if ambos_validos else f'\033[31mCPF {cpf_format} é inválido!\033[m')
+        print(f'\033[32mCPF {cpf_string} é válido!\033[m' if ambos_validos else f'\033[31mCPF {cpf_string} é inválido!\033[m')
         
+    elif CPF == CPF[0] * len(CPF):
+        raise ValueError("\033[31mCPF inválido, o número não pode ser uma sequência de valores iguais.\033[m")
     else:
         raise ValueError("\033[31mCPF inválido, o número de dígitos deve ser 11.\033[m")
 except Exception as error:
