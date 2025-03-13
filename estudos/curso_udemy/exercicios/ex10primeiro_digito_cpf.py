@@ -24,12 +24,12 @@
     O primeiro dígito do CPF é 7
 """
 
-cpf = str(input('Digite seu CPF: ')).replace('.', '').replace('-','') # ! pegar como str, para caso comece com '0', se for int, vai cortar o primeiro digito
+CPF = str(input('Digite seu CPF: ')).replace('.', '').replace('-','') # ! pegar como str, para caso comece com '0', se for int, vai cortar o primeiro digito
 
 try:
-    if len(cpf) == 11:
+    if len(CPF) == 11:
         soma = 0
-        cpf_digitos = cpf[0:9].__iter__()
+        cpf_digitos = CPF[0:9].__iter__()
 
         for i in range(10, 1, -1):
             soma += (i * int(next(cpf_digitos)))
@@ -40,8 +40,8 @@ try:
 
         print(f"Resultado do cálculo do primeiro digito: {resultado}")
         print(f"Primeiro digito calculado: {primeiro_digito}")
-        print(f"Primeiro digito: {cpf[9]}")
-        print('Primeiro digito válido!' if primeiro_digito == int(cpf[9]) else 'Primeiro digito inválido')
+        print(f"Primeiro digito: {CPF[9]}")
+        print('Primeiro digito válido!' if primeiro_digito == int(CPF[9]) else 'Primeiro digito inválido')
     else:
         raise ValueError("CPF inválido, o número de dígitos deve ser 11.")
 except Exception as error:
