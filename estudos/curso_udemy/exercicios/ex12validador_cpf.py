@@ -56,11 +56,10 @@ def linha(tam = 42):
 linha()
 
 import re
-import random
 
-cpf_string = str(input('Digite seu CPF: ')) # ! pegar como str, para caso comece com '0', se for int, vai cortar o primeiro digito
+cpf_string = str(input('Digite seu CPF: ')) # > pegar como str, para caso comece com '0', se for int, vai cortar o primeiro digito
 
-CPF = re.sub(r'[^0-9]', '',cpf_string)
+CPF = re.sub(r'[^0-9]', '', cpf_string) # > Serve para remover qualquer caracter que não seja um número
 
 try:
     if len(CPF) == 11 and CPF != CPF[0] * len(CPF):
@@ -75,11 +74,11 @@ try:
         for i in range(11, 1, -1):
             soma_segundo_digito += (i * int(next(cpf_digitos_segundo_digito)))
 
-        # ? Cálculo para descobrir o primeiro dígito
+        # ! Cálculo para descobrir o primeiro dígito
         resultado_primeiro_digito = (soma_primeiro_digito * 10) % 11
         primeiro_digito = 0 if resultado_primeiro_digito >= 10 else resultado_primeiro_digito
         
-        # ? Cálculo para descobrir o segundo dígito
+        # ! Cálculo para descobrir o segundo dígito
         resultado_segundo_digito = (soma_segundo_digito * 10) % 11
         segundo_digito = 0 if resultado_segundo_digito >= 10 else resultado_segundo_digito
 
