@@ -13,7 +13,6 @@ cpf = sub(r'[^0-9]', '', cpf_string)
 
 linha()
 try:
-
         # ? Cálculo para descobrir o primeiro dígito
 
         soma_primeiro_digito = 0
@@ -42,5 +41,5 @@ try:
         print(f'CPF válido gerado: {cpf_formatado}')  
         
 except Exception as error:
-    print(f"Digite um cpf válido. ERRO: \033[31m{error}\033[m")
+    print(f"Erro ao gerar CPF: \033[31m{error}\033[m")
 linha()
