@@ -46,10 +46,12 @@ print(f"Os números pares:", *pares)
 from random import randint
 porcentagem_dado_6 = 0
 for i in range(10):
+    
     lista_valores_dados = []
     for j in range(50):
         lista_valores_dados.append(randint(1,6))
     porcentagem_dado_6 += (lista_valores_dados.count(6) / 50) * 100
+    
 porcentagem_dado_6 /= 10
 print(f"Fizemos 10 testes e a porcentagem de cair 6 ficou em média {porcentagem_dado_6:.2f}%!")
 
@@ -57,16 +59,16 @@ print(f"Fizemos 10 testes e a porcentagem de cair 6 ficou em média {porcentagem
 
 # ! EXERCÍCIO 5
 tradutor = {
-    "olá": "hello",
-    "mundo": "world",
-    "gato": "cat",
-    "cachorro": "dog",
-    "obrigado": "thank you",
-    "amor": "love",
-    "comida": "food",
-    "casa": "house",
-    "livro": "book",
-    "amigo": "friend"
+    'olá': 'hello',
+    'mundo': 'world',
+    'gato': 'cat',
+    'cachorro': 'dog',
+    'obrigado': 'thank you',
+    'amor': 'love',
+    'comida': 'food',
+    'casa': 'house',
+    'livro': 'book',
+    'amigo': 'friend'
 }
 
 palavra = str(input("Digite uma palavra: ")).lower()

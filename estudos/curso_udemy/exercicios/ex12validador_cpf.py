@@ -96,7 +96,9 @@ try:
         if primeiro_digito == int(CPF[9]) and segundo_digito == int(CPF[10]):
             ambos_validos = True
         
-        print(f'\033[32mCPF {cpf_string} é válido!\033[m' if ambos_validos else f'\033[31mCPF {cpf_string} é inválido!\033[m')
+        cpf_formatado = f'{cpf_string[:3]}.{cpf_string[3:6]}.{cpf_string[6:9]}-{cpf_string[9:]}'
+        
+        print(f'\033[32mCPF {cpf_formatado} é válido!\033[m' if ambos_validos else f'\033[31mCPF {cpf_string} é inválido!\033[m')
         
     elif CPF == CPF[0] * len(CPF):
         raise ValueError("\033[31mCPF inválido, o número não pode ser uma sequência de valores iguais.\033[m")
