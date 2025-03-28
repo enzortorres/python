@@ -111,8 +111,6 @@ tk.geometry('600x300')
 # a6.place(x=348, y=30)
 # a7.place(x=406, y=30)
 
-# checkboxs = [a1, a2, a3, a4, a5, a6, a7]
-
 # def mostrar_selecionados():
 #     selecionados = []
 #     if futebol_var.get():
