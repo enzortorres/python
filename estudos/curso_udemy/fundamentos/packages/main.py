@@ -13,5 +13,3 @@ print(soma_do_modulo(2,3))
 # ! MÁ PRÁTICA
 from main_package.module import * 
 print(soma_do_modulo(2,3))
-
-

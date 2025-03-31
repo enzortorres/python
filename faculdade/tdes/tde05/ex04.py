@@ -27,6 +27,7 @@ def divisao():
 tk = Tk()
 tk.title('TDE05 EX 04')
 tk.geometry('350x200')
+tk.resizable(0,0)
 
 frame = Frame(tk, bg="#CECECE", width=500, height=300)
 frame.place(x=0, y=0)
