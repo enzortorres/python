@@ -1,1 +1,1 @@
-from ex18_package.ex18_modulo import produtos
+from ex18_package.ex18_modulo import produtos, exibir_lista

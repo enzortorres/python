@@ -5,3 +5,10 @@ produtos = [
     {'nome': 'Produto 5', 'preco': 105.37,},
     {'nome': 'Produto 1', 'preco': 93.23,},
 ]
+
+def exibir_lista(lista):
+    for item in lista:
+        nome = item['nome']
+        preco_formatado = f'R${item['preco']:.2f}'.replace('.',',')
+        print(f"Nome: {nome} | Preço: {preco_formatado}")
+    print()
