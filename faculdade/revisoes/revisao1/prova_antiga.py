@@ -4,7 +4,6 @@
     * b) tkinter.mainloop() 
     c) tkinter.run()
     d) tkinter.start()
-    > b)
 
     ? Questão 2 (1,0 ponto): O que acontece quando ocorre uma exceção em Python, mas não é capturada por um bloco try-except?
     a) O programa continua normalmente
@@ -116,7 +115,7 @@ def verificar_produto():
     
 def cadastrar_produto():
     nome_produto = entry_produto.get().strip()
-    preco_produto = int(preco_entry.get())
+    preco_produto = float(preco_entry.get())
 
     produtos[nome_produto] = preco_produto
     res_label.config(text=f"{nome_produto} cadastrado com sucesso!")

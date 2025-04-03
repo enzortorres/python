@@ -1,5 +1,5 @@
 def fabrica_de_decoradores(a=None, b=None, c=None):
-    def fabrica_de_funcoes(func):
+    def fabrica_de_funcoes(func): # > Decoradores recebem uma função como parâmetro obrigatoriamente
         print('Decoradora 1')
         
         def aninhada(*args, **kwargs):
@@ -10,7 +10,7 @@ def fabrica_de_decoradores(a=None, b=None, c=None):
     return fabrica_de_funcoes
 
 
-@fabrica_de_decoradores()
+lista = []
 def soma(x, y):
     return x + y
 
