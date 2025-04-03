@@ -101,36 +101,29 @@
 
 from tkinter import *
 
-
 def verificar_produto():
     nome_produto = entry_produto.get().strip()
     
-    for produto in produtos:
-        if nome_produto in produto.values():
-            res_label.config(text=f"Preço: R${produto['preco']}")
-            break
-        if not hasattr(verificar_produto, "preco_entry"):
-            res_label.config(text="Produto não encontrado!\nDigite um preço para seu produto: ")
-            
-            preco_entry = Entry(tk)
-            preco_entry.grid(row=4, column=0)
-            
-            btn_cadastrar = Button(tk, text="Cadastrar produto", command=lambda: cadastrar_produto())
-            btn_cadastrar.grid(row=5, column=0)
-        if nome_produto == "sair":
-            tk.destroy()
-    def cadastrar_produto():
-        nome_produto = entry_produto.get().strip()
-        preco_produto = int(preco_entry.get())
+    if nome_produto == "sair":
+        tk.destroy()
+    if nome_produto in produtos:
+        res_label.config(text=f"Preço: R${produtos[nome_produto]}")
+    else:
+        res_label.config(text="Produto não encontrado!\nDigite um preço para seu produto: ")
+        
+        preco_entry.grid(row=4, column=0)
+        btn_cadastrar.grid(row=5, column=0)
     
-        produtos.append({'nome': nome_produto, 'preco': preco_produto})
-        res_label.config(text=f"{nome_produto} cadastrado com sucesso!")
-        preco_entry.destroy()
-        btn_cadastrar.destroy()
+def cadastrar_produto():
+    nome_produto = entry_produto.get().strip()
+    preco_produto = int(preco_entry.get())
 
-produtos = [
-    {}
-]
+    produtos[nome_produto] = preco_produto
+    res_label.config(text=f"{nome_produto} cadastrado com sucesso!")
+    preco_entry.grid_remove()
+    btn_cadastrar.grid_remove()
+
+produtos = {}
 
 tk = Tk()
 tk.geometry('500x300')
@@ -147,5 +140,9 @@ btn_verificar.grid(row=2, column=0)
 
 res_label = Label(tk, text="")
 res_label.grid(row=3, column=0)
+
+preco_entry = Entry(tk)
+btn_cadastrar = Button(tk, text="Cadastrar produto", command=cadastrar_produto)
+
 
 tk.mainloop()
