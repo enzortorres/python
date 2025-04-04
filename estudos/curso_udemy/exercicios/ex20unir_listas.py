@@ -7,4 +7,8 @@ def zipper(estados, uf):
 estados = ['Salvador', 'Ubatuba', 'Belo Horizonte']
 uf = ['BA', 'SP', 'MG', 'RJ']
 
-print(zipper(estados, uf))
+from itertools import zip_longest
+
+print(zipper(estados, uf)) 
+print(list(zip(estados, uf))) # > Utiliza a lista menor como referência
+print(list(zip_longest(estados, uf))) # > Utiliza a lista maior como referência

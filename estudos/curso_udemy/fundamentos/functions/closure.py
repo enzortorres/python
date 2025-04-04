@@ -1,5 +1,5 @@
 """
-Closure e funções que retornam oturas funções
+    Closure e funções que retornam oturas funções
 """
 
 def criar_saudacao(saudacao):
