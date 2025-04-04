@@ -4,7 +4,6 @@
 # ? Decoradores são usados para fazer o Python usar as funções decoradoras em outras funções.
 # ? Decoradores são "Syntax Sugar" (Açúcar sintático)
 
-
 def criar_funcao(func): # ! Função decoradora, criar uma função internada sem execução, somente retornada
     def interna(*args, **kwargs):
         print("Vou te decorar")

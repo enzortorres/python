@@ -9,7 +9,6 @@ def fabrica_de_decoradores(a=None, b=None, c=None):
         return aninhada
     return fabrica_de_funcoes
 
-
 lista = []
 def soma(x, y):
     return x + y
