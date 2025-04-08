@@ -9,6 +9,9 @@ TABLE_NAME = 'customer' # > Nome da tabela
 connection = sqlite3.connect(DB_FILE) # > Para conectar/criar arquivo sqlite
 cursor = connection.cursor() # > Para criar o cursor
 
+# ? CRUD        - CREATE READ   UPDATE DELETE 
+# ? CRUD NO SQL - INSERT SELECT UPDATE DELETE
+
 # > Para cria uma tabela
 cursor.execute(
     f"""\
@@ -21,21 +24,29 @@ cursor.execute(
 )
 connection.commit()
 
-# sql = ( 
-#     f'INSERT INTO {TABLE_NAME}'
-#     '(name, weight) VALUES'
-#     '(:nome, :peso)' # > Os nomes das chaves do dicionário
-# )
-# print(sql)
+# ! CUIDADO: Fazendo delete sem where
+# > Apaga tudo do banco de dados, porém o ID por sem autoincremental, continua do último ID
+cursor.execute(
+    f"""
+    DELETE FROM {TABLE_NAME} 
+    """
+)
+connection.commit()
 
-# cursor.execute(sql, {'nome': 'Matheus', 'peso': 10}) # > No caso de usar dicionários, os placeholders precisam ser o nome das chaves
-# cursor.executemany(sql, (
-#     {'nome': 'Joãozinho', 'peso': 3},
-#     {'nome': 'Helena', 'peso': 2},
-#     {'nome': 'Maria', 'peso': 4},
-#     {'nome': 'Joaninha', 'peso': 5},
-# ))
-# connection.commit()
+sql = ( 
+    f'INSERT INTO {TABLE_NAME}'
+    '(name, weight) VALUES'
+    '(:nome, :peso)' # > Os nomes das chaves do dicionário
+)
+
+cursor.execute(sql, {'nome': 'Matheus', 'peso': 10}) # > No caso de usar dicionários, os placeholders precisam ser o nome das chaves
+cursor.executemany(sql, (
+    {'nome': 'Joãozinho', 'peso': 3},
+    {'nome': 'Helena', 'peso': 2},
+    {'nome': 'Maria', 'peso': 4},
+    {'nome': 'Joaninha', 'peso': 5},
+))
+connection.commit()
 
 # # > Registrar valores nas colunas da tabela
 # # ! CUIDADO: SQL Injection
@@ -48,34 +59,31 @@ connection.commit()
 
 # > Registrar vários valores nas colunas da tabela
 
-# # > Para atualizar uma tabela
-# cursor.execute( 
-#     f"""\
-#     UPDATE {TABLE_NAME} 
-#         SET name = 'Adriane'
-#         WHERE id = 2
-#     """
-# )
-# connection.commit()
+# > Para atualizar uma tabela
+cursor.execute( 
+    f"""\
+    UPDATE {TABLE_NAME} 
+        SET name = 'Adriane', weight=54.43
+        WHERE id = 2
+    """
+)
+connection.commit()
 
-# ! CUIDADO: Fazendo delete sem where
-# > Apaga tudo do banco de dados, porém o ID por sem autoincremental, continua do último ID
-# cursor.execute(
-#     f"""
-#     DELETE FROM {TABLE_NAME} 
-#     """
-# )
-# connection.commit()
 
 # > Para zerar a "sequência" do ID
-# cursor.execute(
-#     f"""\
-#     DELETE FROM sqlite_sequence 
-#         WHERE name="{TABLE_NAME}"
-#     """
-# )
-# connection.commit()
+cursor.execute(
+    f"""\
+    DELETE FROM sqlite_sequence 
+        WHERE name="{TABLE_NAME}"
+    """
+)
+connection.commit()
 
 # > Precisa fechar o cursor e a conexão ao final do código
-cursor.close()
-connection.close()
+
+
+if __name__ == '__main__':
+    print(sql)
+    
+    cursor.close()
+    connection.close()
