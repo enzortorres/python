@@ -1,22 +1,25 @@
 from tkinter import *
 
 def infos_lista():
+    qtd_nove = 0
+    pares = []
+    index_tres = 0
     try:
         numeros = entry.get().strip().split(",")
         numeros = [int(num) for num in numeros]
         
         qtd_nove = numeros.count(9)
-        index_tres = numeros.index(3)
         pares = [num for num in numeros if num % 2 == 0]
+        index_tres = numeros.index(3)
         
+    except:
+        index_tres = -1
+    finally:
         res_label.config(
             text=f"O número 9 apareceu {qtd_nove} vezes\n" \
                 f"A primeira ocorrência do número 3 foi no índice {index_tres}\n" \
                 f"Os números pares digitados foram: {pares}"
-        )
-    except:
-        res_label.config("ERRO")
-    
+        )        
 
 tk = Tk()
 tk.geometry('500x300')

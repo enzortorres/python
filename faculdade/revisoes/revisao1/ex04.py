@@ -3,7 +3,6 @@ from tkinter import *
 def calculadora():
     num1 = int(number1_entry.get())
     num2 = int(number2_entry.get())
-    
     res_label.config(
         text=f"Adição: {num1} + {num2} = {num1+num2}\n" +
             f"Subtração: {num1} - {num2} = {num1-num2}\n" + 

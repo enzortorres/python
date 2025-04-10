@@ -80,9 +80,9 @@
     : janela.mainloop()
 
     ? O que será impresso ao clicar repetidamente na caixa de seleção?
-    * a) "Selecionado" será impresso sempre que o botão for clicado.
+    a) "Selecionado" será impresso sempre que o botão for clicado.
     b) "Desmarcado" será impresso sempre que o botão for clicado.
-    c) Alternará entre "Selecionado" e "Desmarcado".
+    * c) Alternará entre "Selecionado" e "Desmarcado".
     d) Nada será impresso.
     
     ? Questão 9 (1,0 ponto): Como você adiciona um elemento à lista minha_lista?
