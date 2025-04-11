@@ -25,10 +25,11 @@
 """
 
 import os
+from pathlib import Path
 
 # > No windows é bom usar '\\' para separar as pastas
-caminho_arquivo = 'C:\\Users\\enzor\\OneDrive\\Desktop\\Estudos\\python\\estudos\\curso_udemy\\fundamentos\\file_manipulation\\' 
-caminho_arquivo += 'file.txt'
+caminho_arquivo = Path(__file__).parent
+caminho_arquivo = caminho_arquivo / 'file.txt'
 
 # > Sem with open
 # try: 

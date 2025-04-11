@@ -1,5 +1,5 @@
 import sqlite3
-from main import DB_FILE, TABLE_NAME
+from estudos.curso_udemy.database.sqlite.testes.teste import DB_FILE, TABLE_NAME
 
 connection = sqlite3.connect(DB_FILE)
 cursor = connection.cursor()
