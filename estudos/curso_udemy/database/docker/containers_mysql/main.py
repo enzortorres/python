@@ -4,7 +4,7 @@
 # > GitHub: https://github.com/PyMySQL/PyMySQL
 
 # ! Importações necessárias
-import pymysql
+import pymysql # ? Precisa instalar a biblioteca pymysql com o pip
 import dotenv
 import os
 
@@ -23,7 +23,9 @@ connection = pymysql.connect(
 
 TABLE_NAME = 'users'
 
+
 with connection:
+    # ! Manipulando valores com CREATE, INSERT, TRUNCATE
     with connection.cursor() as cursor:
         cursor.execute(
             # É bom deixar um espaço em branco ao final das linhas, para não ocorrer erros
@@ -57,10 +59,55 @@ with connection:
             'idade': 62,
         } 
         results = cursor.execute(sql, data_dict)
+        
+    with connection.cursor() as cursor:
+        sql = (
+            f'INSERT INTO {TABLE_NAME} (nome, idade) '
+            '   VALUES (%(nome)s, %(idade)s) ' # Quando for usar placeholders com iteráveis, no caso dicionários, precisa colocar o nome das chaves
+        )
+        data_dict_iterator = (
+            {'nome': 'Patrick', 'idade': 23,},
+            {'nome': 'Jesus', 'idade': 44,},
+            {'nome': 'Delia', 'idade': 31,},
+        )
+        results = cursor.executemany(sql, data_dict_iterator)
+        
+    with connection.cursor() as cursor:
+        sql = (
+            f'INSERT INTO {TABLE_NAME} (nome, idade) '
+            '   VALUES (%s, %s) ' # Quando for usar placeholders com iteráveis, no caso tuplas, precisa colocar por posição
+        )
+        data_tuple_iterator = (
+            ('Siri', 23),
+            ('Cortana', 63),
+        )
+        results = cursor.executemany(sql, data_tuple_iterator)
 
-    print(sql, data_dict)
+    print(sql, data_tuple_iterator)
+    print(f"{results} linha(s) afetada(s).")
     connection.commit() # As modificações não são autocomitadas, então é necessário comitar para salvar as modificações
-    # print(f"{results} linha(s) afetada(s).")
+    
+    # ! Lendo valores com SELECT
+    with connection.cursor() as cursor:
+        menor_id = int(input('Digite o menor id: '))
+        maior_id = int(input('Digite o maior id: '))
+        
+        sql = (
+            f'SELECT * FROM {TABLE_NAME} '
+            f'WHERE id >= %s  AND id <= %s ' # Desta forma está protegido de SQL Injection
+        )
+        
+        cursor.execute(sql, (menor_id, maior_id))
+        print(cursor.mogrify(sql, (menor_id, maior_id))) # O que vai para o banco de dados
+        
+        print(sql)
+        # for row in cursor.fetchall(): # ? Desse jeito retorna um iterável, então só da para percorrer ele uma vez
+        #     print(row)
+            
+        data_select = cursor.fetchall() #  Retorna o iterável para a lista
+        for row in data_select: #  Desse jeito ele percorre uma lista
+            print(row)
+    
     
 # cursor.close() # Utilizando "with" não precisa fechar manualmente
 # connection.close() # Ao abrir uma conexão, precisa fecha-lá
