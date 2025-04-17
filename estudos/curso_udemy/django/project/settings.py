@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'home', # ? Primeira coisa a se fazer ao criar um app (adicionar na lista o nome do app)
+    'blog',
 ]
 
 MIDDLEWARE = [

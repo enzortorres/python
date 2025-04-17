@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 # HTTP Request <-> HTTP Response
 # Django funciona por MVT (Model View Template), variação de MVC (Model View Controller)
@@ -8,8 +7,7 @@ from django.http import HttpResponse
 
 def blog(request):
     print("blog") # Pode fazer oque quiser dentro da função
-    return HttpResponse('Blog do app 1')
+    return render(request, 'blog/index.html')
 
 def exemplo(request):
-    print("exemplo") # Pode fazer oque quiser dentro da função
-    return HttpResponse('exemplo do app 1')
+    return render(request, 'blog/exemplo.html')
