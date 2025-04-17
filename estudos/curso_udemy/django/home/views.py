@@ -7,8 +7,20 @@ from django.shortcuts import render
 
 def home(request):
     print("home") # Pode fazer oque quiser dentro da função
-    return render(request, 'home/index.html')
+    
+    context = {
+        'text': 'Olá home',
+        'title': 'Site home',
+    }
+    
+    return render(request, 'home/index.html', context)
 
 def exemplo(request):
-    print("exemplo") # Pode fazer oque quiser dentro da função
-    return render(request, 'home/exemplo.html')
+    print("global") # Pode fazer oque quiser dentro da função
+    
+    context = {
+        'text': 'Olá exemplo',
+        'title': 'Site exemplo',
+    }
+    
+    return render(request, 'home/exemplo.html', context)
