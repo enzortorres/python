@@ -1,6 +1,5 @@
-{% include "global/partials/head.html" %}
-{% load static %}
+{% extends "global/base.html" %}
 
-<body>
-    <h1>Exemplo do blog</h1>
-</body>
+{% block texto %}
+{{ text }}
+{% endblock texto %}

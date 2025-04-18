@@ -7,7 +7,19 @@ from django.shortcuts import render
 
 def blog(request):
     print("blog") # Pode fazer oque quiser dentro da função
-    return render(request, 'blog/index.html')
+    
+    context = {
+        'text': 'Olá blog',
+        'title': 'Blog',
+    }
+    
+    return render(request, 'blog/index.html', context)
 
 def exemplo(request):
-    return render(request, 'blog/exemplo.html')
+    
+    context = {
+        'text': 'Olá exemplo do blog',
+        'title': 'Exemplo',
+    }
+    
+    return render(request, 'blog/exemplo.html', context)

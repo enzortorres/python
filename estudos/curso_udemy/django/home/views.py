@@ -10,7 +10,7 @@ def home(request):
     
     context = {
         'text': 'Olá home',
-        'title': 'Site home',
+        'title': 'Home',
     }
     
     return render(request, 'home/index.html', context)
@@ -19,8 +19,8 @@ def exemplo(request):
     print("global") # Pode fazer oque quiser dentro da função
     
     context = {
-        'text': 'Olá exemplo',
-        'title': 'Site exemplo',
+        'text': 'Olá exemplo do home',
+        'title': 'Exemplo home',
     }
     
     return render(request, 'home/exemplo.html', context)

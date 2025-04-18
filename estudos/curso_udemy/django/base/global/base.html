@@ -1,7 +1,19 @@
 {% include "global/partials/head.html" %}
-{% load static %}
+{% include "global/partials/menu.html" %}
 
 <body>
-    <h1>{% block texto %} BASE {% endblock texto %}</h1>
+    <h1>{% block texto %} {% endblock texto %}</h1>
+    <main class="posts">
+        {% include "global/partials/postblock.html" %}
+        {% include "global/partials/postblock.html" %}
+        {% include "global/partials/postblock.html" %}
+        {% include "global/partials/postblock.html" %}
+        {% include "global/partials/postblock.html" %}
+        {% include "global/partials/postblock.html" %}
+        {% include "global/partials/postblock.html" %}
+        {% include "global/partials/postblock.html" %}
+        {% include "global/partials/postblock.html" %}
+        {% include "global/partials/postblock.html" %}
+    </main>
 </body>
 </html>

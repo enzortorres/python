@@ -1,6 +1,5 @@
-{% include "global/partials/head.html" %}
+{% extends "global/base.html" %}
 
-<body>
-    <h1>Home do blog</h1>
-</body>
-</html>
+{% block texto %}
+{{ text }}
+{% endblock texto %}
