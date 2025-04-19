@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from blog.data import posts
+
 
 # HTTP Request <-> HTTP Response
 # Django funciona por MVT (Model View Template), variação de MVC (Model View Controller)
@@ -11,6 +13,7 @@ def blog(request):
     context = {
         'text': 'Olá blog',
         'title': 'Blog',
+        'posts': posts,
     }
     
     return render(request, 'blog/index.html', context)
