@@ -81,3 +81,7 @@ article {
     }
 }
 
+.post-anchor {
+    text-decoration: underline;
+    color: crimson;
+}

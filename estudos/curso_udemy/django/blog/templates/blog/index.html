@@ -1,6 +1,8 @@
 {% extends "global/base.html" %}
 
-{% block texto %} {{ text }} {% endblock texto %}
+{% if text %}
+    {% block texto %} {{ text }} {% endblock texto %}
+{% endif %}
 
 {% block posts %}
     {% for post in posts%}

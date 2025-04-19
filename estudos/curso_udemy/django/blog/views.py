@@ -11,8 +11,18 @@ def blog(request):
     print("blog") # Pode fazer oque quiser dentro da função
     
     context = {
-        'text': 'Olá blog',
+        # 'text': 'Olá blog',
         'title': 'Blog',
+        'posts': posts,
+    }
+    
+    return render(request, 'blog/index.html', context)
+
+def post(request, id):
+    print("post", id) # Pode fazer oque quiser dentro da função
+    
+    context = {
+        'title': 'Post',
         'posts': posts,
     }
     
