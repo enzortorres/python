@@ -23,9 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-$l^ry#*s@bgsulvl_1d_%(nr*c9j7kid_m$pav+4b@s93@0s))'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False # Debug falso, ele usa o arquivos estáticos,
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [ # Para rodar com debug falso, precisa colocar o host permitido
+    # '127.0.0.1',
+]
 
 # Application definition
 
@@ -36,12 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'home', # ? Primeira coisa a se fazer ao criar um app (adicionar na lista o nome do app)
+    'home', # Primeira coisa a se fazer ao criar um app (adicionar na lista o nome do app)
     'blog',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', # Servidor para rodar os arquivos statics
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -121,6 +124,9 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'base' / 'static',
 ]
+
+#https://whitenoise.readthedocs.io/en/latest
+STATIC_ROOT = BASE_DIR / 'static_files'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
