@@ -103,22 +103,22 @@ cursor = connection.cursor()
 
 # # ? Ordenação asc/desc - order by
 
-print("\nOs nomes ordenados por nome (A-Z)\n")
+# print("\nOs nomes ordenados por nome (A-Z)\n")
 
-cursor.execute(
-    'SELECT nome FROM aluno '
-    '   ORDER BY nome ASC '
-)
-query = cursor.fetchall()
-for linha in query:
-    print(linha)
+# cursor.execute(
+#     'SELECT nome FROM aluno '
+#     '   ORDER BY nome ASC '
+# )
+# query = cursor.fetchall()
+# for linha in query:
+#     print(linha)
 
-print("\nOs nomes ordenados por nome (Z-A)\n")
+# print("\nOs nomes ordenados por nome (Z-A)\n")
 
-cursor.execute(
-    'SELECT nome FROM aluno '
-    '   ORDER BY nome DESC '
-)
-query = cursor.fetchall()
-for linha in query:
-    print(linha)
+# cursor.execute(
+#     'SELECT nome FROM aluno '
+#     '   ORDER BY nome DESC '
+# )
+# query = cursor.fetchall()
+# for linha in query:
+#     print(linha)
