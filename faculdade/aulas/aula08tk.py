@@ -23,7 +23,8 @@ cursor.execute(
     '   codigo INT PRIMARY KEY, '
     '   nome VARCHAR(20) NOT NULL, '
     '   preco DECIMAL(10,2) NOT NULL, '
-    '   qtd INT NOT NULL) '
+    '   qtd INT NOT NULL '
+    ') '
 )
 
 tk = Tk()
@@ -45,7 +46,7 @@ def inserir():
             (codigo, nome, preco, qtd)
         )
         connection.commit()
-        messagebox.showinfo(f'Produto "{nome}" inserido com sucesso.')
+        messagebox.showinfo('Sucesso', f'Produto "{nome}" inserido com sucesso.')
 
 Label(tk,text='Código:').grid(row=0,column=0,padx=5,pady=5)
 e_codigo = Entry(tk)
@@ -67,7 +68,7 @@ frame_botoes = Frame(tk)
 frame_botoes.grid(row=4, column=0, columnspan=2, pady=10)
 
 Button(frame_botoes, text='Consultar').pack(side=LEFT, padx=5)
-Button(frame_botoes, text='Inserir').pack(side=LEFT, padx=5)
+Button(frame_botoes, text='Inserir', command=inserir).pack(side=LEFT, padx=5)
 Button(frame_botoes, text='Alterar').pack(side=LEFT, padx=5)
 Button(frame_botoes, text='Excluir').pack(side=LEFT, padx=5)
 
