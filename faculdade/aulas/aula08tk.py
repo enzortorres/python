@@ -1,5 +1,5 @@
 from mysql import connector
-import mysql
+
 from tkinter import *
 from tkinter import messagebox 
 

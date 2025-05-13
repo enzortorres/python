@@ -40,4 +40,11 @@ cursor = connection.cursor()
 # connection.commit()
 # print(cursor.rowcount, 'linha(s) alterada(s).')
 
-# drop - 
+# ? drop  - apaga tudo-------------------------------------------------------
+
+# cursor.execute('drop database aula8')
+# cursor.execute('drop table aluno')
+
+cursor.close()
+connection.close()
+print('Conexão encerrada')
