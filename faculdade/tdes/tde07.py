@@ -64,7 +64,7 @@ dadosLivros = [
 ]
 cursor.executemany('INSERT INTO livro(nome_autor, assunto, editora, qtd_estoque) VALUES(%s, %s, %s, %s)', dadosLivros)
 
-# cursor.execute("UPDATE cliente SET CPF='12351223123' WHERE codigo = 1")
+cursor.execute("UPDATE cliente SET CPF='12351223123' WHERE codigo = 1")
 
 connection.commit()
 
