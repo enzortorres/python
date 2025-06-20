@@ -7,7 +7,7 @@ connection = connector.connect(
     host='localhost',
     user='root',
     passwd='',
-    database='loja'
+    database='',
 )
 
 cursor = connection.cursor()
@@ -15,6 +15,11 @@ cursor = connection.cursor()
 # Criando a database
 cursor.execute(
     'CREATE DATABASE IF NOT EXISTS loja '
+)
+
+# Usando a database
+cursor.execute(
+    'USE loja'
 )
 
 # Criando as tabelas
