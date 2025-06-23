@@ -3,8 +3,9 @@ from mysql import connector
 from tkinter import *
 from tkinter import messagebox
 
-# > Conexão banco de dados
+import datetime
 
+# > Conexão banco de dados
 connection = connector.connect(
     host='localhost',
     user='root',
@@ -40,41 +41,92 @@ cursor.execute(
 
 cursor.execute(
     'CREATE TABLE IF NOT EXISTS matriculas( '
-    '   id_matricula INT PRIMARY KEY, '
+    '   id_matricula INT AUTO_INCREMENT PRIMARY KEY, '
     '   id_aluno INT NOT NULL, '
     '   id_curso INT NOT NULL, '
-    '   dt_matricula DATE NOT NULL, '
+    '   dt_matricula DATE DEFAULT CURRENT_DATE, '
     '   FOREIGN KEY (id_aluno) REFERENCES alunos(id_aluno), '
     '   FOREIGN KEY (id_curso) REFERENCES cursos(id_curso) '
     ') '
 )
 
+# > Funções aluno
+
+def cadastrar_aluno():
+    codigo = aluno_codigo.get()
+    nome = aluno_nome.get()
+    email = aluno_email.get()
+    telefone = aluno_telefone.get()
+    dt_nascimento = aluno_dt_nascimento.get()
+    
+    if (codigo == '' or nome == '' or email == '' or telefone == '' or dt_nascimento == ''):
+        messagebox.showerror('Atualizar', 'Todos os campos são obrigatórios')
+        return
+    
+    try:
+        datetime.datetime.strptime(dt_nascimento, "%d/%m/%Y")
+    except ValueError:
+        messagebox.showerror('Erro', 'Data de nascimento inválida. Use o formato YYYY-MM-DD.')
+        return
+    
+    try:
+        cursor.execute(
+            'INSERT INTO alunos(id_aluno, nome_aluno, email, telefone, dt_nasc) '
+            '   VALUES(%s, %s, %s, %s, %s)', (codigo, nome, email, telefone, dt_nascimento)
+        )
+        connection.commit()
+        messagebox.showerror('Sucesso', f'Aluno {nome} foi cadastrado(a) com sucesso!')
+    except Exception as e:
+        messagebox.showerror('Erro', f'Erro ao tentar cadastrar aluno!\n{e}')
+
+def visualizar_aluno():
+    codigo = aluno_codigo.get()
+    
+    if (codigo == ''):
+        messagebox.showerror('Atualizar', 'O campo "Código" é obrigatório!')
+        return
+    
+    
+    
+
 # > Interface
 
 tk = Tk()
-tk.geometry('500x300')
+tk.geometry('500x350')
 tk.title('Revisão G2 - Sistema escolar')
+
+# ! Frame aluno
 
 frame_aluno = Frame(tk)
 frame_aluno.grid(row=0, column=1, sticky='nw', padx=50)
 
-
 Label(frame_aluno, text='Aluno', font='Bold 16').grid(row=0, column=0)
 
 Label(frame_aluno, text='Código').grid(row=1, column=0)
-aluno_codigo = Entry(frame_aluno).grid(row=2, column=0)
+aluno_codigo = Entry(frame_aluno)
+aluno_codigo.grid(row=2, column=0)
 
-Label(frame_aluno, text='Nome').grid(row=1, column=0)
-aluno_nome = Entry(frame_aluno).grid(row=2, column=0)
+Label(frame_aluno, text='Nome').grid(row=3, column=0)
+aluno_nome = Entry(frame_aluno)
+aluno_nome.grid(row=4, column=0)
 
-Label(frame_aluno, text='Email').grid(row=3, column=0)
-aluno_email = Entry(frame_aluno).grid(row=4, column=0)
+Label(frame_aluno, text='Email').grid(row=5, column=0)
+aluno_email = Entry(frame_aluno)
+aluno_email.grid(row=6, column=0)
 
-Label(frame_aluno, text='Telefone').grid(row=5, column=0)
-aluo_telefone = Entry(frame_aluno).grid(row=6, column=0)
+Label(frame_aluno, text='Telefone').grid(row=7, column=0)
+aluno_telefone = Entry(frame_aluno)
+aluno_telefone.grid(row=8, column=0)
 
-Label(frame_aluno, text='Data de nascimento').grid(row=7, column=0)
-aluno_dt_nascimento = Entry(frame_aluno).grid(row=8, column=0)
+Label(frame_aluno, text='Data de nascimento').grid(row=9, column=0)
+aluno_dt_nascimento = Entry(frame_aluno)
+aluno_dt_nascimento.grid(row=10, column=0)
+
+Button(frame_aluno, text='Cadastrar', command=cadastrar_aluno).grid(row=11, column=0)
+Button(frame_aluno, text='Visualizar').grid(row=12, column=0)
+Button(frame_aluno, text='Excluir').grid(row=13, column=0)
+
+# ! Frame curso
 
 frame_curso = Frame(tk)
 frame_curso.grid(row=0, column=2, sticky='ne', padx=50)
@@ -82,15 +134,19 @@ frame_curso.grid(row=0, column=2, sticky='ne', padx=50)
 Label(frame_curso, text='Curso', font='Bold 16').grid(row=0, column=0)
 
 Label(frame_curso, text='Código').grid(row=1,column=0)
-curso_id_curso = Entry(frame_curso).grid(row=2, column=0)
+curso_id_curso = Entry(frame_curso)
+curso_id_curso.grid(row=2, column=0)
 
 Label(frame_curso, text='Nome').grid(row=3,column=0)
-curso_nome = Entry(frame_curso).grid(row=4, column=0)
+curso_nome = Entry(frame_curso)
+curso_nome.grid(row=4, column=0)
 
 Label(frame_curso, text='Descrição').grid(row=5, column=0)
-curso_desc = Entry(frame_curso).grid(row=6, column=0)
+curso_desc = Entry(frame_curso)
+curso_desc.grid(row=6, column=0)
 
-
-
+Button(frame_curso, text='Cadastrar').grid(row=7, column=0)
+Button(frame_curso, text='Visualizar').grid(row=8, column=0)
+Button(frame_curso, text='Excluir').grid(row=9, column=0)
 
 tk.mainloop()
