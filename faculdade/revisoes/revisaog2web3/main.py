@@ -59,12 +59,12 @@ def cadastrar_aluno():
     telefone = aluno_telefone.get()
     dt_nascimento = aluno_dt_nascimento.get()
     
-    if (codigo == '' or nome == '' or email == '' or telefone == '' or dt_nascimento == ''):
+    if codigo == '' or nome == '' or email == '' or telefone == '' or dt_nascimento == '':
         messagebox.showerror('Atualizar', 'Todos os campos são obrigatórios')
         return
     
     try:
-        datetime.datetime.strptime(dt_nascimento, "%d/%m/%Y")
+        datetime.datetime.strptime(dt_nascimento, "%Y-%m-%d")
     except ValueError:
         messagebox.showerror('Erro', 'Data de nascimento inválida. Use o formato YYYY-MM-DD.')
         return
@@ -75,18 +75,35 @@ def cadastrar_aluno():
             '   VALUES(%s, %s, %s, %s, %s)', (codigo, nome, email, telefone, dt_nascimento)
         )
         connection.commit()
-        messagebox.showerror('Sucesso', f'Aluno {nome} foi cadastrado(a) com sucesso!')
+        messagebox.showinfo('Sucesso', f'Aluno {nome} foi cadastrado(a) com sucesso!')
     except Exception as e:
         messagebox.showerror('Erro', f'Erro ao tentar cadastrar aluno!\n{e}')
+    finally:
+        aluno_codigo.delete(0, END)
+        aluno_nome.delete(0, END)
+        aluno_email.delete(0, END)
+        aluno_telefone.delete(0, END)
+        aluno_dt_nascimento.delete(0, END)
 
 def visualizar_aluno():
     codigo = aluno_codigo.get()
     
-    if (codigo == ''):
+    if codigo == '':
         messagebox.showerror('Atualizar', 'O campo "Código" é obrigatório!')
         return
     
+    cursor.execute(
+        'SELECT * FROM alunos'
+        '   WHERE id_aluno=%s',
+        (codigo,)
+    )
+    rows = cursor.fetchall()
     
+    if rows:
+        for row in rows:
+            messagebox.showinfo('Visualizar', f'Código: {row[0]}\nNome: {row[1]}\nEmail: {row[2]}\nTelefone: {row[3]}\nData nascimento: {row[4]}')
+    else:
+        messagebox.showerror('Erro', 'Nenhum aluno encontrado!') 
     
 
 # > Interface
@@ -123,7 +140,7 @@ aluno_dt_nascimento = Entry(frame_aluno)
 aluno_dt_nascimento.grid(row=10, column=0)
 
 Button(frame_aluno, text='Cadastrar', command=cadastrar_aluno).grid(row=11, column=0)
-Button(frame_aluno, text='Visualizar').grid(row=12, column=0)
+Button(frame_aluno, text='Visualizar', command=visualizar_aluno).grid(row=12, column=0)
 Button(frame_aluno, text='Excluir').grid(row=13, column=0)
 
 # ! Frame curso
