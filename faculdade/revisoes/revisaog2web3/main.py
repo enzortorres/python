@@ -23,7 +23,7 @@ cursor.execute('USE escola')
 
 cursor.execute(
     'CREATE TABLE IF NOT EXISTS alunos( '
-    '   id_aluno INT PRIMARY KEY, '
+    '   id_aluno INT AUTO_INCREMENT PRIMARY KEY, '
     '   nome_aluno VARCHAR(50) NOT NULL, '
     '   email VARCHAR(100) UNIQUE NOT NULL, '
     '   telefone VARCHAR(20), '
@@ -33,7 +33,7 @@ cursor.execute(
 
 cursor.execute(
     'CREATE TABLE IF NOT EXISTS cursos( '
-    '   id_curso INT PRIMARY KEY, '
+    '   id_curso INT AUTO_INCREMENT PRIMARY KEY, '
     '   nome_curso VARCHAR(100) NOT NULL, '
     '   descricao TEXT '
     ') '
@@ -53,13 +53,13 @@ cursor.execute(
 # > Funções aluno
 
 def cadastrar_aluno():
-    codigo = aluno_codigo.get()
     nome = aluno_nome.get()
     email = aluno_email.get()
     telefone = aluno_telefone.get()
     dt_nascimento = aluno_dt_nascimento.get()
+    idade = aluno_idade.get()
     
-    if codigo == '' or nome == '' or email == '' or telefone == '' or dt_nascimento == '':
+    if nome == '' or email == '' or telefone == '' or dt_nascimento == '' or idade == '':
         messagebox.showerror('Atualizar', 'Todos os campos são obrigatórios')
         return
     
@@ -71,8 +71,8 @@ def cadastrar_aluno():
     
     try:
         cursor.execute(
-            'INSERT INTO alunos(id_aluno, nome_aluno, email, telefone, dt_nasc) '
-            '   VALUES(%s, %s, %s, %s, %s)', (codigo, nome, email, telefone, dt_nascimento)
+            'INSERT INTO alunos(nome_aluno, email, telefone, dt_nasc) '
+            '   VALUES(%s, %s, %s, %s, %s)', (nome, email, telefone, dt_nascimento, idade)
         )
         connection.commit()
         messagebox.showinfo('Sucesso', f'Aluno {nome} foi cadastrado(a) com sucesso!')
@@ -84,6 +84,7 @@ def cadastrar_aluno():
         aluno_email.delete(0, END)
         aluno_telefone.delete(0, END)
         aluno_dt_nascimento.delete(0, END)
+        aluno_idade.delete(0, END)
 
 def visualizar_aluno():
     codigo = aluno_codigo.get()
@@ -104,7 +105,105 @@ def visualizar_aluno():
             messagebox.showinfo('Visualizar', f'Código: {row[0]}\nNome: {row[1]}\nEmail: {row[2]}\nTelefone: {row[3]}\nData nascimento: {row[4]}')
     else:
         messagebox.showerror('Erro', 'Nenhum aluno encontrado!') 
+
+def excluir_aluno():
+    codigo = aluno_codigo.get()
     
+    if codigo == '':
+        messagebox.showerror('Atualizar', 'Informe o código do aluno para excluir')
+        return
+
+    try:
+        cursor.execute(
+            'DELETE FROM alunos '
+            '   WHERE id_aluno=%s' ,
+            (codigo,)
+        )
+        connection.commit()
+        messagebox.showinfo('Excluir', 'Produto excluido com sucesso!')
+        aluno_codigo.delete(0, END)
+    except Exception as e:
+        messagebox.showerror('Erro', f'Erro ao excluir aluno: {e}')
+
+def maiores_18_anos():
+    try:
+        cursor.execute(
+            'SELECT * FROM alunos '
+            '   WHERE idade >= 18'
+        )
+        
+        rows = cursor.fetchall()
+    
+        if rows:
+            nomes = ''
+            for row in rows:
+                nomes += f"{row[1]}\n"
+        messagebox.showinfo('Maiores de 18', f'Alunos com mais de 18 anos:\n{nomes}')
+    except Exception as e:
+        messagebox.showerror('Erro', 'Erro ao procurar alunos maiores de 18 anos')
+
+# > Funções curso
+
+def cadastrar_curso():
+    codigo = curso_codigo.get()
+    nome = curso_nome.get()
+    desc = curso_desc.get()
+    
+    if codigo == '' or nome == '' or desc == '':
+        messagebox.showerror('Atualizar', 'Todos os campos são obrigatórios')
+        return
+    
+    try:
+        cursor.execute(
+            'INSERT INTO cursos(id_curso, nome_curso, desc) '
+            '   VALUES(%s, %s, %s)', (codigo, nome, desc)
+        )
+        connection.commit()
+        messagebox.showinfo('Sucesso', f'Curso {nome} foi cadastrado(a) com sucesso!')
+        curso_codigo.delete(0, END)
+        curso_nome.delete(0, END)
+        curso_desc.delete(0, END)
+    except Exception as e:
+        messagebox.showerror('Erro', f'Erro ao tentar cadastrar curso!\n{e}')
+
+def visualizar_curso():
+    codigo = curso_codigo.get()
+    
+    if codigo == '':
+        messagebox.showerror('Atualizar', 'O campo "Código" é obrigatório!')
+        return
+    
+    cursor.execute(
+        'SELECT * FROM cursos'
+        '   WHERE id_curso=%s',
+        (codigo,)
+    )
+    rows = cursor.fetchall()
+    
+    if rows:
+        for row in rows:
+            messagebox.showinfo('Visualizar', f'Código: {row[0]}\nNome: {row[1]}\nDescrição: {row[2]}')
+    else:
+        messagebox.showerror('Erro', 'Nenhum curso encontrado!') 
+
+def excluir_curso():
+    codigo = curso_codigo.get()
+    
+    if codigo == '':
+        messagebox.showerror('Atualizar', 'Informe o código do curso para excluir')
+        return
+
+    try:
+        cursor.execute(
+            'DELETE FROM cursos '
+            '   WHERE id_curso=%s' ,
+            (codigo,)
+        )
+        connection.commit()
+        messagebox.showinfo('Excluir', 'Curso excluído com sucesso!')
+        aluno_codigo.delete(0, END)
+    except Exception as e:
+        messagebox.showerror('Erro', f'Erro ao excluir curso: {e}')
 
 # > Interface
 
@@ -139,9 +238,14 @@ Label(frame_aluno, text='Data de nascimento').grid(row=9, column=0)
 aluno_dt_nascimento = Entry(frame_aluno)
 aluno_dt_nascimento.grid(row=10, column=0)
 
-Button(frame_aluno, text='Cadastrar', command=cadastrar_aluno).grid(row=11, column=0)
-Button(frame_aluno, text='Visualizar', command=visualizar_aluno).grid(row=12, column=0)
-Button(frame_aluno, text='Excluir').grid(row=13, column=0)
+Label(frame_aluno, text='Idade').grid(row=11, column=0)
+aluno_idade = Entry(frame_aluno)
+aluno_idade.grid(row=12, column=0)
+
+Button(frame_aluno, text='Cadastrar', command=cadastrar_aluno).grid(row=13, column=0)
+Button(frame_aluno, text='Visualizar', command=visualizar_aluno).grid(row=14, column=0)
+Button(frame_aluno, text='Excluir', command=excluir_aluno).grid(row=15, column=0)
+Button(frame_aluno, text='Maiores de 18 anos', command=maiores_18_anos).grid(row=16, column=0)
 
 # ! Frame curso
 
@@ -151,8 +255,8 @@ frame_curso.grid(row=0, column=2, sticky='ne', padx=50)
 Label(frame_curso, text='Curso', font='Bold 16').grid(row=0, column=0)
 
 Label(frame_curso, text='Código').grid(row=1,column=0)
-curso_id_curso = Entry(frame_curso)
-curso_id_curso.grid(row=2, column=0)
+curso_codigo = Entry(frame_curso)
+curso_codigo.grid(row=2, column=0)
 
 Label(frame_curso, text='Nome').grid(row=3,column=0)
 curso_nome = Entry(frame_curso)
@@ -162,8 +266,8 @@ Label(frame_curso, text='Descrição').grid(row=5, column=0)
 curso_desc = Entry(frame_curso)
 curso_desc.grid(row=6, column=0)
 
-Button(frame_curso, text='Cadastrar').grid(row=7, column=0)
-Button(frame_curso, text='Visualizar').grid(row=8, column=0)
-Button(frame_curso, text='Excluir').grid(row=9, column=0)
+Button(frame_curso, text='Cadastrar', command=cadastrar_curso).grid(row=7, column=0)
+Button(frame_curso, text='Visualizar', command=visualizar_curso).grid(row=8, column=0)
+Button(frame_curso, text='Excluir', command=excluir_curso).grid(row=9, column=0)
 
 tk.mainloop()
