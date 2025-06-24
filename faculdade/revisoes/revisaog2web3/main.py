@@ -27,7 +27,9 @@ cursor.execute(
     '   nome_aluno VARCHAR(50) NOT NULL, '
     '   email VARCHAR(100) UNIQUE NOT NULL, '
     '   telefone VARCHAR(20), '
-    '   dt_nasc DATE '
+    '   dt_nasc DATE, '
+    '   idade INT NOT NULL, '
+    '   status VARCHAR(50) NOT NULL'
     ') '
 )
 
@@ -58,8 +60,9 @@ def cadastrar_aluno():
     telefone = aluno_telefone.get()
     dt_nascimento = aluno_dt_nascimento.get()
     idade = aluno_idade.get()
+    status = aluno_status.get()
     
-    if nome == '' or email == '' or telefone == '' or dt_nascimento == '' or idade == '':
+    if nome == '' or email == '' or telefone == '' or dt_nascimento == '' or idade == '' or status == '':
         messagebox.showerror('Atualizar', 'Todos os campos são obrigatórios')
         return
     
@@ -69,10 +72,14 @@ def cadastrar_aluno():
         messagebox.showerror('Erro', 'Data de nascimento inválida. Use o formato YYYY-MM-DD.')
         return
     
+    if status != 'Aprovado' and status != 'Reprovado' and status != 'Cursando':
+        messagebox.showerror('Erro', 'Situação inválida')
+        return
+    
     try:
         cursor.execute(
-            'INSERT INTO alunos(nome_aluno, email, telefone, dt_nasc) '
-            '   VALUES(%s, %s, %s, %s, %s)', (nome, email, telefone, dt_nascimento, idade)
+            'INSERT INTO alunos(nome_aluno, email, telefone, dt_nasc, idade, status) '
+            '   VALUES(%s, %s, %s, %s, %s, %s)', (nome, email, telefone, dt_nascimento, idade, status)
         )
         connection.commit()
         messagebox.showinfo('Sucesso', f'Aluno {nome} foi cadastrado(a) com sucesso!')
@@ -102,7 +109,7 @@ def visualizar_aluno():
     
     if rows:
         for row in rows:
-            messagebox.showinfo('Visualizar', f'Código: {row[0]}\nNome: {row[1]}\nEmail: {row[2]}\nTelefone: {row[3]}\nData nascimento: {row[4]}')
+            messagebox.showinfo('Visualizar', f'Código: {row[0]}\nNome: {row[1]}\nEmail: {row[2]}\nTelefone: {row[3]}\nData nascimento: {row[4]}\nIdade: {row[5]}\nStatus: {row[6]}')
     else:
         messagebox.showerror('Erro', 'Nenhum aluno encontrado!') 
 
@@ -124,6 +131,30 @@ def excluir_aluno():
         aluno_codigo.delete(0, END)
     except Exception as e:
         messagebox.showerror('Erro', f'Erro ao excluir aluno: {e}')
+
+def trocar_status_aluno():
+    codigo = aluno_codigo.get()
+    status = aluno_status.get()
+    
+    if codigo == '':
+        messagebox.showerror('Erro', 'Informe o código do aluno para trocar a situação do mesmo.')
+        return
+    
+    if status != 'Aprovado' and status != 'Reprovado' and status != 'Cursando':
+        messagebox.showerror('Erro', 'Situação inválida')
+        return
+    
+    try:
+        cursor.execute(
+            'UPDATE alunos '
+            '   SET status=%s'
+            '   WHERE id_aluno=%s',
+            (status, codigo,)
+        )
+        connection.commit()
+        messagebox.showinfo('Sucesso', 'Situação atualizada')
+    except Exception as e:
+        messagebox.showerror('Erro', 'Erro ao tentar atualizar o status')    
 
 def maiores_18_anos():
     try:
@@ -208,7 +239,7 @@ def excluir_curso():
 # > Interface
 
 tk = Tk()
-tk.geometry('500x350')
+tk.geometry('500x450')
 tk.title('Revisão G2 - Sistema escolar')
 
 # ! Frame aluno
@@ -242,10 +273,15 @@ Label(frame_aluno, text='Idade').grid(row=11, column=0)
 aluno_idade = Entry(frame_aluno)
 aluno_idade.grid(row=12, column=0)
 
-Button(frame_aluno, text='Cadastrar', command=cadastrar_aluno).grid(row=13, column=0)
-Button(frame_aluno, text='Visualizar', command=visualizar_aluno).grid(row=14, column=0)
-Button(frame_aluno, text='Excluir', command=excluir_aluno).grid(row=15, column=0)
-Button(frame_aluno, text='Maiores de 18 anos', command=maiores_18_anos).grid(row=16, column=0)
+Label(frame_aluno, text='Situação (Aprovado/Reprovado/Cursando)').grid(row=13, column=0)
+aluno_status = Entry(frame_aluno)
+aluno_status.grid(row=14, column=0)
+
+Button(frame_aluno, text='Cadastrar', command=cadastrar_aluno).grid(row=15, column=0)
+Button(frame_aluno, text='Visualizar', command=visualizar_aluno).grid(row=16, column=0)
+Button(frame_aluno, text='Excluir', command=excluir_aluno).grid(row=17, column=0)
+Button(frame_aluno, text='Trocar situação', command=trocar_status_aluno).grid(row=18, column=0)
+Button(frame_aluno, text='Maiores de 18 anos', command=maiores_18_anos).grid(row=19, column=0)
 
 # ! Frame curso
 
