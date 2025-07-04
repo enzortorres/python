@@ -1,11 +1,12 @@
 """
-    | @property - um getter no modo Pythônico
+    | @property + @setter - getter e setter no modo Pythônico
     ? getter - um método para obter um atributo
     
     * cor -> get_cor()
     
     ? modo pythônico - modo do Python de fazer coisas
     ? @property é uma propriedade do objeto, ela é um método que se comporta como um atributo
+    ? atributos que começar com um ou dois "_", não devem ser usados fora da classe.
     
     : Geralmente é usada nas seguintes situações:
         > como getter
@@ -33,15 +34,38 @@
 
 class Caneta:
     def __init__(self, cor):
-        self.cor_tinta = cor
+        self._cor = cor
+        self._cor_tampa = None
 
-    @property
+    @property # getter
     def cor(self):
-        print("PROPERTY")
-        return self.cor_tinta
+        return self._cor
+    
+    @cor.setter # setter, é bom criar o setter assim para poder criar restrições
+    def cor(self, valor):
+        if valor == 'Rosa':
+            raise ValueError("Não aceito essa cor")
+        
+        self._cor = valor
+    
+    @property
+    def cor_tampa(self):
+        return self._cor_tampa
+    
+    @cor_tampa.setter
+    def cor_tampa(self, valor):
+        self._cor_tampa = valor
 
 caneta = Caneta('Azul')
 print(caneta.cor)
 print(caneta.cor)
 print(caneta.cor)
-print(caneta.cor)
+caneta.cor_tampa = 'Azul'
+
+caneta.cor = 'Pink'
+
+print('Cor: ', caneta.cor)
+print('Cor tampa: ', caneta.cor_tampa)
+
+# caneta.cor = 'Vermelho' # ! ERRO
+# ? caneta.cor deixou de ser um atributo e passou a ser um getter com @property
