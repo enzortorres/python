@@ -1,5 +1,6 @@
 """
     | Relações enre classes: associações, agregação e composição
+    > Agregação - tem
     ? Agregação é uma forma mais especialiazada de associação entre dois ou mais objetos.
     ? Cada objeto terá seu ciclo de vida independente.
     ? Geralmente é uma relação de um para muitos, onde um objeto tem um ou mais objetos.

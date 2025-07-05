@@ -1,5 +1,6 @@
 """
     | Relações entre classes: associações, agregação e composição
+    > Composição - é dono de
     ? Composição é uma especialização da agregação.
     ? Mas nela, quando o objeto "pai" for apagado, todas as referências dos objetos filhos também são apagadas. 
 """
