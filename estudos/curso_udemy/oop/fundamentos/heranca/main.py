@@ -13,9 +13,9 @@
     : Classes filhas (Carro), (Cliente), (Computador)
         > sub class, child class, derived class
     
-    : exemplo : Carro é um Veiculo
-    : exemplo : Cliente é uma Pessoa
-    : exemplo : Computador é um Produto
+    ex: Carro é um Veiculo
+    ex: Cliente é uma Pessoa
+    ex: Computador é um Produto
 """
 
 class Pessoa:

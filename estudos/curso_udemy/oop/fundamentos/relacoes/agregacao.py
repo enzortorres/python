@@ -7,7 +7,7 @@
     ? Os objetos podem viver separadamente, mas pode se tratar de uma relação onde um objeto precisa de outro para fazer determinada tarefa.
     ? (Existem controvérsias sobre as definições de agregação).
     
-    : Exemplo : Carro e roda, ambos vivem sem o outro, mas o carro necessita da roda para funcionar perfeitamente.
+    ex: Carro e roda, ambos vivem sem o outro, mas o carro necessita da roda para funcionar perfeitamente.
 """
 class Carrinho:
     def __init__(self):
