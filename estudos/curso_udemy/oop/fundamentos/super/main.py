@@ -1,10 +1,10 @@
 """
     | super() é a super classe na sub classe
     
-    : Classe principal (Veiculo)
-        > super class, base class, parent class
-    : Classe filhas (Carro)
-        > sub class, child class, derived class
+    > Classe principal (Veiculo)
+        : super class, base class, parent class
+    > Classe filhas (Carro)
+        : sub class, child class, derived class
 """
 
 class MinhaString(str):

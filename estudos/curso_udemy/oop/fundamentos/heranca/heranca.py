@@ -8,10 +8,10 @@
     
     ? Herança ou Composição
     
-    : Classe principal (Veiculo), (Pessoa), (Produto)
-        > super class, base class, parent class
-    : Classes filhas (Carro), (Cliente), (Computador)
-        > sub class, child class, derived class
+    > Classe principal (Veiculo), (Pessoa), (Produto)
+        : super class, base class, parent class
+    > Classes filhas (Carro), (Cliente), (Computador)
+        : sub class, child class, derived class
     
     ex: Carro é um Veiculo
     ex: Cliente é uma Pessoa

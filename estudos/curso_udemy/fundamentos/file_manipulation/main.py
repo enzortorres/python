@@ -3,25 +3,26 @@
     ? Usamos a função open para abrir um arquivo em Python (ele pode ou não existir)
     
     > Modos:
-    ? r (leitura, arquivo precisa existir), w (escrita, apaga o texto anterior, cria arquivo e não le), x (somente para criação)
-    ? a (cria arquivo e escreve ao final, append), b (binário), t (modo texto)
-    ? + (leitura e escrita)
+        : r (leitura, arquivo precisa existir), w (escrita, apaga o texto anterior, cria arquivo e não le), x (somente para criação)
+        : a (cria arquivo e escreve ao final, append), b (binário), t (modo texto)
+        : + (leitura e escrita)
     
     > Context manager - with (abre e fecha)
+    
     > Métodos úteis
-    ? write, read (escrever e ler)
-    ? writelines (escrever várias linhas)
-    ? seek (move o cursor)
-    ? readline (ler linha)
-    ? readlines (ler linhas)
+        : write, read (escrever e ler)
+        : writelines (escrever várias linhas)
+        : seek (move o cursor)
+        : readline (ler linha)
+        : readlines (ler linhas)
     
     > Vamos falar mais sobre o módulo os, mas:
-    ? os.remove ou unlink - apaga o arquivo
-    ? os.rename - troca o nome ou move o arquivo
+        : os.remove ou unlink - apaga o arquivo
+        : os.rename - troca o nome ou move o arquivo
     
     > Vamos falar mais sobre o módulo json, mas:
-    ? json.dump = Gera um arquivo json
-    ? json.load
+        : json.dump = Gera um arquivo json
+        : json.load
 """
 
 import os
