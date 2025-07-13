@@ -32,18 +32,37 @@
         : Ideal para garantir que subclasses sigam um contrato (interface).
         : Muito usado com mixins, padrões de projeto e arquitetura limpa.
 """
+from pathlib import Path
+
+BASE_DIR = Path(__file__).parent / 'log.txt'
 class Log:
-    def log(self, msg):
+    def _log(self, msg):
         raise NotImplementedError('Implemente o método log')
+    
+    def log_error(self, msg):
+        self._log(f'Error: {msg}')
+        
+    def log_sucess(self, msg):
+        self._log(f'Sucess: {msg}')
 
 class LogFileMixin(Log):
-    def log(self, msg):
-        print(msg)
+    def _log(self, msg):
+        msg_formatada = f'{msg} ({self.__class__.__name__})'
+        print('Salvando no log: ', msg_formatada)
+        with open(BASE_DIR, 'a') as file:
+            file.write(msg_formatada)
+            file.write('\n')
 
 class LogPrintMixin(Log):
-    def log(self, msg):
-        print(msg)
+    def _log(self, msg):
+        print(f'{msg} ({self.__class__.__name__})')
 
 if __name__ == '__main__':
-    l = LogFileMixin()
-    l.log('Qualquer coisa')
+    lp = LogPrintMixin()
+    lp.log_error('qualquer coisa')
+    lp.log_sucess('que legal')
+    
+    lf = LogFileMixin()
+    lf.log_error('qualquer coisa')
+    lf.log_sucess('que legal')
+    print(BASE_DIR)

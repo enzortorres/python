@@ -4,7 +4,7 @@
     ? Ela adiciona funcionalidades extras (comportamentos), sem formar uma hierarquia de "é um" (is-a).
     
     ? São usadas com herança múltipla.
-    ? O foco é "reutilização de código", não generalização.
+    ? O foco é "reutilização de código", não generalização.`
     
     > Regras para um Mixin:
         : Não deve ser usada sozinha (não deve ser instanciada diretamente)
@@ -26,8 +26,12 @@
     ? Úteis para separar responsabilidades e evitar códigos duplicado.
 """
 
-from log import Log
+from log import LogFileMixin, LogPrintMixin
 
-if __name__ == '__main__':
-    l = Log()
-    l.log('Qualquer coisa')
+lp = LogPrintMixin()
+lp.log_error('qualquer coisa')
+lp.log_sucess('que legal')
+
+lf = LogFileMixin()
+lf.log_error('qualquer coisa')
+lf.log_sucess('que legal')
