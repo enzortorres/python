@@ -12,3 +12,8 @@
 
 class MyErro(Exception):
     ...
+    
+def levantar():
+    raise MyErro('A mensagem do meu erro')
+
+levantar()
