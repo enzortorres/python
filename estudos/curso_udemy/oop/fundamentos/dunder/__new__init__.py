@@ -22,7 +22,8 @@ class A:
     
     def __repr__(self):
         class_name = type(self).__name__
-        return f'{class_name}()'
+        return f'{class_name}(y={self.y})'
     
 a = A(10)
+print(a)
 print(a.y)
