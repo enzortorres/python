@@ -17,4 +17,6 @@
     : __neg__(self) - -self
     : __str__(self) - str
     : __repr__(self) - strf <= other
+    
+    ? Definem comportamentos padrão de objetos, como inicialização, representação, operações matemáticas e comparações.
 """
