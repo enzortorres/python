@@ -1,6 +1,7 @@
 .vscode
 mysql_206
 static_files
+*.csv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
