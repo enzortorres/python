@@ -20,4 +20,22 @@ data = pd.read_csv("titanic_train.csv")
 # print(data.info())
 
 # > Contar valores vazios por coluna
-print(data.isnull().sum())
+# print(data.isnull().sum())
+
+dados = {
+    "X": [1,2,3,6,8,23]
+}
+
+# > Média dos valores de um array
+dados = pd.DataFrame(dados)
+
+# print(dados.mean())
+
+# > Mostrando a contagem de registros
+# print(dados.count())
+
+# > Mediana
+# print(dados.median())
+
+# > Desvio padrão
+print(dados.std())
