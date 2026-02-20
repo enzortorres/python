@@ -93,13 +93,30 @@ dados = pd.DataFrame(dados)
 import matplotlib.pyplot as plt
 
 # > É possível fazer um histograma simples
-# data.Fare.hist(bins=100) # bins são como se fosse o intervalo, definir muitos bins mostram detalhes finos, mas podendo dificultar a visualização, poucos bins resume muito os dados, podendo esconder padrões importantes
+# data.Fare.hist(bins=100) # ? bin?s são como se fosse o intervalo, definir muitos bins mostram detalhes finos, mas podendo dificultar a visualização, poucos bins resume muito os dados, podendo esconder padrões importantes
 
 # > Gráfico de barras
-# data.Pclass.plot.bar() # muitos dados, pois ta fazendo um gráfico de cada linha de `Pclass`
-# data.Pclass.value_counts().plot.bar() # Gráfico com a contagem de cada valor de `Pclass`
+# data.Pclass.plot.bar() # ? muitos dados, pois ta fazendo um gráfico de cada linha de `Pclass`
+# data.Pclass.value_counts().plot.bar() # ? Gráfico com a contagem de cada valor de `Pclass`
 
 # > E até gráfico mais complexos como o de densidade
-data.Fare.plot.kde()
+# data['Fare'].plot.kde()
 
-plt.show() # Para exibir o gráfico 
+"""
+· Survived: sobrevivente (0 = Não, 1 = Sim)
+. Pclass: Classe da passagem (1 = primeira classe, 2 = segunda classe, 3 = terceira classe)
+· Name: nome do passageiro
+· Sex: Gênero do passageiro
+· Age: Idade (em anos) do passageiro
+· SibSp: número de irmãos / cônjuges a bordo do Titanic
+· Parch: número de pais / filhos a bordo do Titanic
+· Ticket: número do ticket
+· Fare: tarifa da passagem
+· Cabin: número da cabine
+· Embarked: porto de embarque (C = Cherbourg, Q = Queenstown, S = Southampton)
+
+As colunas desse dataset são:
+· Passenger ID: ID do passageiro (número único para cada um dos passageiros)
+"""
+
+# plt.show() # Para exibir o gráfico 
