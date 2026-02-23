@@ -1,2 +1,1 @@
-# python
- studying python
+# Python study repository
