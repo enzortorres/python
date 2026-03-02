@@ -134,6 +134,7 @@ print("LOG")
 print(accuracy_score(y_test, pred_Log))
 
 # | Usando Precisão
+# url: https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_score.html
 
 print("\nPrecisão\n")
 
