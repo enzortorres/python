@@ -1,6 +1,6 @@
 import pandas as pd
 
-data = pd.read_csv("titanic_train.csv")
+data = pd.read_csv("data/titanic_train.csv")
 
 # | Visualizar informações da base
 

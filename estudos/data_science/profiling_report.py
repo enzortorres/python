@@ -1,7 +1,7 @@
 import pandas as pd
 from ydata_profiling import ProfileReport
 
-data = pd.read_csv("titanic_train.csv")
+data = pd.read_csv("data/titanic_train.csv")
 
 profile = ProfileReport(data, title="Pandas Profiling Report")
 

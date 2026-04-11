@@ -1,6 +1,6 @@
 import pandas as pd
 
-data = pd.read_csv('titanic_test.csv')
+data = pd.read_csv('data/titanic_train.csv')
 
 # > Retirando colunas com alta cardinalidade.
 data = data.drop(['PassengerId', 'Name'], axis=1)
@@ -13,8 +13,13 @@ media_idade = data['Age'].mean()
 
 data.loc[data.Age.isnull(), 'Age'] = media_idade # > Atribuindo a média a todas as `Idades` que estão com valores vazios.
 
+# > Removendo as linhas com valores vazios
+data = data.dropna()
+
 # > Novamente elminando os dados do tipo objeto
 colunas = data.dtypes[data.dtypes.values == 'object'].index
 data = data.drop(colunas, axis=1)
 
 print(data.info())
+
+# > 

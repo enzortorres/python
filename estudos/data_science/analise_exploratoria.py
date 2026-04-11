@@ -1,6 +1,6 @@
 import pandas as pd
 
-data = pd.read_csv('titanic_train.csv')
+data = pd.read_csv('data/titanic_train.csv')
 """
 · Survived: sobrevivente (0 = Não, 1 = Sim)
 . Pclass: Classe da passagem (1 = primeira classe, 2 = segunda classe, 3 = terceira classe)

@@ -1,6 +1,6 @@
 import pandas as pd
 
-data = pd.read_csv('titanic_train.csv')
+data = pd.read_csv('data/titanic_train.csv')
 
 # > Verificando as informações da base
 # print(data.info())
@@ -53,7 +53,7 @@ from sklearn.linear_model import LogisticRegression
 clf_log = LogisticRegression(random_state=0, max_iter=1000).fit(x, y)
 print(clf_log.score(x, y))
 
-data_test = pd.read_csv("titanic_test.csv")
+data_test = pd.read_csv("data/titanic_test.csv")
 
 # ! Fazendo os mesmos tratamento para os dados de teste
 
