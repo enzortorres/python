@@ -1,4 +1,4 @@
-def isPrimo(num: int) -> bool:
+def is_primo(num: int) -> bool:
     if num <= 1:
         return False
     total_div = 0
@@ -10,4 +10,4 @@ def isPrimo(num: int) -> bool:
     return True
 
 for i in range(1, 12):
-    print(f"i is primo? {isPrimo(i)}")
+    print(f"i is primo? {is_primo(i)}")

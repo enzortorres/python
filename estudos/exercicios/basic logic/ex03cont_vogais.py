@@ -1,4 +1,4 @@
-def contVogais(String):
+def cont_vogais(String):
     vogais = ['a', 'e', 'i', 'o', 'u']
     cont = 0
 
@@ -8,4 +8,4 @@ def contVogais(String):
     
     return cont
 
-print(contVogais("Enzo"))
+print(cont_vogais("Enzo"))

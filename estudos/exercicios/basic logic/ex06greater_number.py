@@ -1,4 +1,4 @@
-def greaterNumber(numbers: list):
+def greater_number(numbers: list):
     if not numbers:
         return None
     greater = numbers[0]
@@ -8,4 +8,4 @@ def greaterNumber(numbers: list):
 
     return greater
 
-print(greaterNumber([1,4,2,10,5]))
+print(greater_number([1,4,2,10,5]))

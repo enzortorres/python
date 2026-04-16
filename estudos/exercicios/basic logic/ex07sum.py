@@ -1,8 +1,8 @@
-def sumElements(numbers: list):
+def sum_elements(numbers: list):
     total = 0
     for num in numbers:
         total += num
     
     return total
 
-print(sumElements([10,2,4,20])) # 36
+print(sum_elements([10,2,4,20])) # 36

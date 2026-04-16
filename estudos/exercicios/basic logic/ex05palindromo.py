@@ -1,5 +1,5 @@
-def isPalindromo(String):
+def is_palindromo(String):
     palindromo = String[::-1].lower()
     return String.lower() == palindromo
 
-print(isPalindromo("Natan"))
+print(is_palindromo("Natan"))
